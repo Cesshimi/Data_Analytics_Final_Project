@@ -1,6 +1,6 @@
- **ELECTRIC POPULATION DATA ANALYTICS DOCUMENTATION**
+# ELECTRIC POPULATION DATA ANALYTICS DOCUMENTATION
 
-1. **PROJECT OVERVIEW**
+## 1\. PROJECT OVERVIEW
 
 This activity focused on applying descriptive analytics to Electric Vehicle data to identify trends and generate meaningful summaries. The entire data workflow was carried out in Power BI, starting with data preprocessing where the dataset was cleaned, standardized, and checked for consistency to ensure accuracy. 
 
@@ -10,7 +10,7 @@ Data modeling was then performed by creating fact and dimension tables using a s
 
 Finally, an interactive Power BI dashboard was created to visualize the results using charts, slicers, and filters, allowing dynamic exploration of the data.
 
-**2\. DATA COLLECTION PROCEDURE**
+## 2\. DATA COLLECTION PROCEDURE**
 
 ## **Raw Dataset Profile**
 
@@ -24,13 +24,11 @@ Finally, an interactive Power BI dashboard was created to visualize the results 
 | Number of Rows | 135,038 rows |
 | Number of Columns | 17 columns |
 
-## **Dataset Description**
+### **Dataset Description**
+###### The dataset contains information related to electric vehicle registrations and characteristics. The dataset includes vehicle manufacturers, model years, electric vehicle classifications, electric ranges, geographic locations, and utility providers. 
+###### The dataset originally consisted of **(135,038)** records and **(17)** columns before preprocessing and transformation.
 
-The dataset contains information related to electric vehicle registrations and characteristics. The dataset includes vehicle manufacturers, model years, electric vehicle classifications, electric ranges, geographic locations, and utility providers.
-
-The dataset originally consisted of **(135,038)** records and **(17)** columns before preprocessing and transformation.
-
-**3\. DATA CLEANING PROCESS/DOCUMENTATION**  
+## 3\. DATA CLEANING PROCESS/DOCUMENTATION  
 The dataset underwent data cleaning and preprocessing to improve data quality, consistency, completeness, and analytical reliability before visualization and dashboard development.
 
 The following issues were identified and resolved during preprocessing:
@@ -51,72 +49,54 @@ The following issues were identified and resolved during preprocessing:
 | dim\_utility | Electric Utility | Duplicate utility entries caused by multiple fact-level records leading to inconsistent lookup relationships | 77 | 0.06% | Yes | Removed duplicates to ensure unique utility values |
 | dim\_date | Model Year | Repeated time values from transactional data leading to inconsistent time-based relationships | 22 | 0.02% | Yes | Removed duplicates to ensure unique model years |
 
-1. # **Handling Missing Values**
+### Handling Missing Values
 
 | Column Type | Replacement |
 | ----- | ----- |
 | Numerical Fields | 0 |
 | Text Fields | Unknown |
-
-Purpose:  
-Missing values were handled to maintain data completeness and prevent analytical errors during visualization and reporting.  
+ 
+##### Missing values were handled to maintain data completeness and prevent analytical errors during visualization and reporting.  
 ---
 
-2. # **Duplicate Handling**
-
-Duplicate records were removed using the DOL Vehicle ID column because it serves as the unique identifier for each vehicle record.  
+### Duplicate Handling
+##### Duplicate records were removed using the DOL Vehicle ID column because it serves as the unique identifier for each vehicle record.  
 ---
 
-3. # **Data Transformation**
-
-Additional calculated columns were created to improve analysis and reporting.  
+### Data Transformation
+##### Additional calculated columns were created to improve analysis and reporting.  
+- Vehicle Age
+###### Formula: Vehicle Age \= 2026 \- Model Year  
+##### Purpose: The Vehicle Age column was created to analyze the age distribution of electric vehicles.  
 ---
-
-## **c.1 Vehicle Age**
-
-Formula:  
-Vehicle Age \= 2026 \- Model Year  
-Purpose:  
-The Vehicle Age column was created to analyze the age distribution of electric vehicles.  
----
-
-## **c.2 Range Category**
+- Range Category
 
 | Electric Range | Category |
 | ----- | ----- |
 | 0–100 | Low Range |
 | 101–250 | Medium Range |
 | Above 250 | High Range |
-
-Purpose:  
-Range Category was created to simplify battery range analysis through grouped categories.  
+##### Purpose: Range Category was created to simplify battery range analysis through grouped categories.  
 ---
-
-## **c.3 Adoption Period**
+ - Adoption Period
 
 | Model Year | Adoption Period |
 | ----- | ----- |
 | Before 2015 | Early Adoption |
 | 2015–2020 | Growth Period |
 | After 2020 | Modern Adoption |
+##### Purpose: Adoption Period was created to analyze the phases of electric vehicle adoption over time.
 
-Purpose:  
-Adoption Period was created to analyze the phases of electric vehicle adoption over time.
+## 4\. DATA MODEL
 
-4\. **DATA MODEL**
-
-## **Star Schema Model**
-
-A Star Schema model was implemented to simplify data relationships and improve dashboard performance and analytical efficiency.
-
-# **FACT TABLE**
-
-## **Fact\_EV\_Data**
-
+### Star Schema Model
+##### A Star Schema model was implemented to simplify data relationships and improve dashboard performance and analytical efficiency.
+---
+## FACT TABLE
+### Fact\_EV\_Data
 The Fact Table contains the main measurable and transactional electric vehicle records.
 
-### **Fact Table Columns**
-
+ Fact Table Columns
 * DOL Vehicle ID  
 * Electric Range  
 * Model Year  
@@ -134,9 +114,9 @@ The Fact Table contains the main measurable and transactional electric vehicle r
 
 ---
 
-# **DIMENSION TABLES**
+## DIMENSION TABLES
 
-## **dim\_vehicle**
+### **dim\_vehicle**
 
 | Column | Purpose |
 | ----- | ----- |
@@ -144,7 +124,7 @@ The Fact Table contains the main measurable and transactional electric vehicle r
 
 ---
 
-## **dim\_location**
+### **dim\_location**
 
 | Column | Purpose |
 | ----- | ----- |
@@ -152,7 +132,7 @@ The Fact Table contains the main measurable and transactional electric vehicle r
 
 ---
 
-## **dim\_date**
+### **dim\_date**
 
 | Column | Purpose |
 | ----- | ----- |
@@ -160,7 +140,7 @@ The Fact Table contains the main measurable and transactional electric vehicle r
 
 ---
 
-## **dim\_utility**
+### **dim\_utility**
 
 | Column | Purpose |
 | ----- | ----- |
@@ -168,7 +148,7 @@ The Fact Table contains the main measurable and transactional electric vehicle r
 
 ---
 
-# **RELATIONSHIPS**
+## **RELATIONSHIPS**
 
 | Fact Table Column | Dimension Table Column | Relationship |
 | ----- | ----- | ----- |
@@ -177,9 +157,7 @@ The Fact Table contains the main measurable and transactional electric vehicle r
 | Model Year | dim\_date\[Model Year\] | One-to-Many |
 | Electric Utility | dim\_utility\[Electric Utility\] | One-to-Many |
 
-**5\. DASHBOARD WIREFRAME LAYOUT**
-
-**6\. VISUALIZATION & DASHBOARD**
+## 5\. VISUALIZATION & DASHBOARD 
 
 | KPI Card | Purpose |
 | ----- | ----- |
@@ -204,10 +182,17 @@ The Fact Table contains the main measurable and transactional electric vehicle r
 | Total Vehicles by Range Category | Stacked Column Chart | Shows the distribution of electric vehicles based on battery range categories |
 | Total Vehicles by County | Clustered Bar Chart | Displays counties with the highest electric vehicle adoption rates |
 
-**6\. INSIGHT AND RECOMMENDATION**
+## 6\. INSIGHT AND RECOMMENDATION 
 
-| INSIGHT 1 Battery Electric Vehicles (BEVs) dominate the dataset The dashboard shows that Battery Electric Vehicles (BEVs) have a larger population compared to Plug-in Hybrid Electric Vehicles (PHEVs). This indicates that more consumers are shifting toward fully electric transportation instead of hybrid alternatives. Recommendation:Government agencies and private companies should expand EV charging infrastructures such as public charging stations in malls, highways, and business centers to support the increasing number of BEV users. |
-| :---- |
-| **INSIGHT 2 Average EV range influences consumer preference** The Average EV Range metric shows that vehicles with longer driving ranges are more attractive to users because they reduce charging frequency and “range anxiety.” **Recommendation:** Manufacturers should focus on improving battery efficiency and range capacity to make EVs more practical for long-distance travel. |
-| **INSIGHT 3 EV growth supports environmental sustainability** The increasing number of electric vehicles contributes to lower greenhouse gas emissions and reduced dependence on traditional fuel-powered transportation. **Recommendation:**Governments and environmental organizations should continue supporting clean energy initiatives and renewable energy integration for EV charging systems. |
+#### **1. INSIGHT  Battery Electric Vehicles (BEVs) dominate the dataset**
+ The dashboard shows that Battery Electric Vehicles (BEVs) have a larger population compared to  Plug-in Hybrid Electric Vehicles (PHEVs). This indicates that more consumers are shifting  toward fully electric transportation instead of hybrid alternatives. 
+##### Recommendation: Government agencies and private companies should expand EV charging infrastructures such as public charging stations in malls, highways, and business centers to support the increasing number of BEV users. 
+---
+#### **2. INSIGHT Average EV range influences consumer preference** 
+The Average EV Range metric shows that vehicles with longer driving ranges are more attractive to users because they reduce charging frequency and “range anxiety.” 
+##### Recommendation: Manufacturers should focus on improving battery efficiency and range capacity to make EVs more practical for long-distance travel. 
+---
+#### 3. **INSIGHT EV growth supports environmental sustainability**
+The increasing number of electric vehicles contributes to lower greenhouse gas emissions and reduced dependence on traditional fuel-powered transportation.
+##### Recommendation: Governments and environmental organizations should continue supporting clean energy initiatives and renewable energy integration for EV charging systems. 
 
