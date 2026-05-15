@@ -1,0 +1,16 @@
+table,column ,issue,row count,magnitude,solvable?,resolution
+Fact_EV_Data,Electric Range,Missing numeric values,1,0.00%,Y,Replaced null with 0
+Fact_EV_Data,Postal Code,Missing numeric values,8,0.01%,Y,Replaced blank with unknown
+Fact_EV_Data,County,Blank rows,8,0.01%,Y,Replaced blank with unknown
+Fact_EV_Data,City,Blank rows,8,0.01%,Y,Replaced blank with unknown
+Fact_EV_Data,Electric Utility,Blank rows,8,0.01%,Y,Replaced blank with unknown
+Fact_EV_Data,VIN (1-10),No Analytical value ,"135,038",100.00%,Y,Removed during preprocessing
+Fact_EV_Data,Vehicle Location,Redundant Geographic data,"135,038",100.00%,Y,Removed during preprocessing
+Fact_EV_Data,2020 Census Tract,Data not needed for business analytics,"135,038",100.00%,Y,Removed during preprocessing
+Fact_EV_Data,Postal Code,"Wrong data type, causing loss of 
+leading zeroes and formating issues","135,038",100.00%,Y,Converted from Whole Number to Text
+dim_vehicle,Make,"Duplicate categorical values from fact table extraction, leading to inconsistent dimension relationships.",36,0.03%,Y,Removed duplicates to ensure unique makes
+dim_location,County,"Repeated geographic values inherited from transactional data, leading to inconsistent relationship mapping.",170,0.13%,Y,Removed duplicates to ensure unique counties
+dim_utility,Electric Utility,"Duplicate utility entries caused by multiple fact-level records, leading to inconsistent lookup relationships.",77,0.06%,Y,Removed duplicates to ensure unique utilities
+dim_date,Model Year,"Repeated time values from transactional data, leading to inconsistent time-based relationships.",22,0.02%,Y,Removed duplicates to ensure unique years
+,,,,,,
